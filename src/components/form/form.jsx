@@ -6,6 +6,7 @@ import TextInput from '../textinput';
 import FilePreview from '../filepreview';
 import Image from '../file';
 import Modal from '../modal';
+import Message from '../message';
 
 const Form = () => {
   const MAX_VALUE = 50;
@@ -14,6 +15,7 @@ const Form = () => {
   const [error, setError] = useState();
   const [disbaled, setDisabled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const counter = inputValue.length + fileList.length * 10;
 
   useEffect(() => {
     buttonDisabledHandler(inputValue, fileList);
@@ -21,12 +23,15 @@ const Form = () => {
   }, [inputValue, fileList]);
 
   const buttonDisabledHandler = (text, files) => {
-    const counter = text.length + files.length;
-    counter > MAX_VALUE || counter < 1 ? setDisabled(true) : setDisabled(false);
+    const condition = text.length + files.length * 10;
+    condition > MAX_VALUE || condition < 1
+      ? setDisabled(true)
+      : setDisabled(false);
   };
 
   const addErrorClass = (text, files) => {
-    text.length + files.length > MAX_VALUE ? setError('error') : setError('');
+    const condition = text.length + files.length * 10;
+    condition > MAX_VALUE ? setError('error') : setError('');
   };
 
   const submitHandler = (event) => {
@@ -83,12 +88,13 @@ const Form = () => {
           <FileLoader onChange={fileAdd} />
         </div>
       </div>
-
+      {counter > MAX_VALUE && (
+        <Message className="error">
+          Exceeded the maximum number of charecters (maximum: {MAX_VALUE})
+        </Message>
+      )}
       <div className="button__wrap">
-        <Counter
-          value={inputValue.length + fileList.length * 10}
-          maxValue={MAX_VALUE}
-        />
+        <Counter value={counter} maxValue={MAX_VALUE} />
         <div className="btns">
           <FilePreview file={fileList.length}>{file}</FilePreview>
           <Submit disabled={disbaled} />
