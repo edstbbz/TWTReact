@@ -84,15 +84,16 @@ const Form = () => {
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
         />
+        {counter > MAX_VALUE && (
+          <Message className="error__message">
+            Exceeded the maximum number of charecters (maximum: {MAX_VALUE})
+          </Message>
+        )}
         <div className="files__wrap">
           <FileLoader onChange={fileAdd} />
         </div>
       </div>
-      {counter > MAX_VALUE && (
-        <Message className="error">
-          Exceeded the maximum number of charecters (maximum: {MAX_VALUE})
-        </Message>
-      )}
+
       <div className="button__wrap">
         <Counter value={counter} maxValue={MAX_VALUE} />
         <div className="btns">
