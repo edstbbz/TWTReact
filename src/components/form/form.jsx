@@ -5,7 +5,6 @@ import TextInput from '../Textinput';
 import FilePreview from '../Filepreview';
 import Image from '../File';
 import Modal from '../Modal';
-import Message from '../Message';
 import Button from '../Button';
 
 const Form = () => {
@@ -63,12 +62,12 @@ const Form = () => {
           placeholder="Enter text..."
           type="text"
         />
-        {counter > MAX_VALUE && (
-          <Message className="error__message">
-            Exceeded the maximum number of charecters (maximum: {MAX_VALUE})
-          </Message>
-        )}
         <FileLoader onChange={handleFileAdd} />
+        {counter > MAX_VALUE && (
+          <span className="error__message">
+            Exceeded the maximum number of charecters (maximum: {MAX_VALUE})
+          </span>
+        )}
       </div>
 
       <div className="footer__form">
