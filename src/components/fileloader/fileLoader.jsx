@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const FileLoader = (props) => {
   const { onChange } = props;
   return (
-    <>
+    <div className="files__wrap">
       <label className="label__files" htmlFor="files" />
       <input
         onChange={onChange}
@@ -15,7 +15,7 @@ const FileLoader = (props) => {
         accept=".jpg,.jpeg,.png,.gif,.webp"
         multiple
       />
-    </>
+    </div>
   );
 };
 

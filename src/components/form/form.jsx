@@ -89,9 +89,7 @@ const Form = () => {
             Exceeded the maximum number of charecters (maximum: {MAX_VALUE})
           </Message>
         )}
-        <div className="files__wrap">
-          <FileLoader onChange={fileAdd} />
-        </div>
+        <FileLoader onChange={fileAdd} />
       </div>
 
       <div className="button__wrap">
