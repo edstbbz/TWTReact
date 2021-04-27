@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 
 const FilePreview = (props) => {
   const { children } = props;
+
   if (children === 0) {
     return null;
   }
-  return <div className="files__preview">{children}</div>; 
+  return <div className="files__preview">{children}</div>;
 };
 
 FilePreview.propTypes = {
-  children: PropTypes.array
+  children: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default FilePreview;

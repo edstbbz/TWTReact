@@ -5,14 +5,13 @@ const Modal = (props) => {
   const { onClose, classList, children } = props;
   
   return (
-    <div>
+    <div className="bg" onClick={onClose}>
       <div className={`modal ${classList}`}>
         <div className="modal_close" onClick={onClose}>
           &times;
         </div>
         <div className="modal_content">{children}</div>
       </div>
-      <div className="bg" onClick={onClose} />
     </div>
   );
 };

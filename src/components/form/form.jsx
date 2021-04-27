@@ -1,12 +1,12 @@
 import React, { useState, Fragment } from 'react';
-import Counter from '../counter';
-import FileLoader from '../fileloader';
-import TextInput from '../textinput';
-import FilePreview from '../filepreview';
-import Image from '../file';
-import Modal from '../modal';
-import Message from '../message';
-import Button from '../button';
+import Counter from '../Counter';
+import FileLoader from '../Fileloader';
+import TextInput from '../Textinput';
+import FilePreview from '../Filepreview';
+import Image from '../File';
+import Modal from '../Modal';
+import Message from '../Message';
+import Button from '../Button';
 
 const Form = () => {
   const MAX_VALUE = 50;
@@ -20,8 +20,7 @@ const Form = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    const content = { message: inputValue, images: fileList };
-    console.log(content);
+    console.log({ message: inputValue, images: fileList });
     setInputValue('');
     setFileList([]);
   };
@@ -35,19 +34,19 @@ const Form = () => {
     setFileList(list);
   };
 
-  const fileModalOpen = (value, img) => {
-    const image = fileList.filter((file) => file === img);
-    setFileForModal(image)
+  const fileModalOpen = (value, index) => {
+    const image = fileList[index];
+    setFileForModal(image);
     setIsOpenModal(value);
   };
 
-  const listOfImages = fileList.map((img) => {
+  const listOfImages = fileList.map((img, index) => {
     return (
       <Fragment key={img.name}>
         <Image
           img={img}
           onDelete={() => handleFileDelete(img.name)}
-          onClick={() => fileModalOpen(true, img)}
+          onClick={() => fileModalOpen(true, index)}
         />
       </Fragment>
     );
@@ -56,12 +55,13 @@ const Form = () => {
   return (
     <form className="form" onSubmit={submitHandler}>
       <h3 className="label">Create new post:</h3>
-      <div className="_inputs">
+      <div className="inputs">
         <TextInput
-          className={errorClass}
+          isError={errorClass}
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
           placeholder="Enter text..."
+          type="text"
         />
         {counter > MAX_VALUE && (
           <Message className="error__message">
@@ -71,16 +71,16 @@ const Form = () => {
         <FileLoader onChange={handleFileAdd} />
       </div>
 
-      <div className="button__wrap">
+      <div className="footer__form">
         <Counter value={counter} maxValue={MAX_VALUE} />
-        <div className="btns">
+        <div className="footer__container">
           <FilePreview>{listOfImages}</FilePreview>
           <Button disabled={disabled} />
         </div>
       </div>
       {isOpenModal && (
         <Modal isOpen={isOpenModal} onClose={() => fileModalOpen(false)}>
-          <img src={fileForModal} alt={fileForModal} />
+          <img src={URL.createObjectURL(fileForModal)} alt={fileForModal} />
         </Modal>
       )}
     </form>
