@@ -7,7 +7,8 @@ const Message = (props) => {
 };
 
 Message.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  children: PropTypes.node
 };
 
 export default Message;
