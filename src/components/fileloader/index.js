@@ -1,1 +1,1 @@
-export { default } from './fileLoader';
+export { default } from './FileLoader';
