@@ -2,28 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Modal = (props) => {
-  const { isOpen, onClose, addClass, children } = props;
-  if (!isOpen) {
-    return null;
-  }
-
+  const { onClose, classList, children } = props;
+  
   return (
-    <>
-      <div className={`modal ${addClass}`}>
-        <div className="modal_close" onClick={() => onClose()}>
+    <div>
+      <div className={`modal ${classList}`}>
+        <div className="modal_close" onClick={onClose}>
           &times;
         </div>
         <div className="modal_content">{children}</div>
       </div>
-      <div className="bg" onClick={() => onClose()} />
-    </>
+      <div className="bg" onClick={onClose} />
+    </div>
   );
 };
 
 Modal.propTypes = {
-  isOpen: PropTypes.bool,
   onClose: PropTypes.func,
-  addClass: PropTypes.string
+  classList: PropTypes.string,
+  children: PropTypes.node
 };
 
 export default Modal;

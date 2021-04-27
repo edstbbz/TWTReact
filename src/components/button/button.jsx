@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Submit = (props) => {
+const Button = (props) => {
   const { disabled } = props;
   return (
     <button disabled={disabled} className="button">
@@ -10,8 +10,8 @@ const Submit = (props) => {
   );
 };
 
-Submit.propTypes = {
+Button.propTypes = {
   disabled: PropTypes.bool
 };
 
-export default Submit;
+export default Button;

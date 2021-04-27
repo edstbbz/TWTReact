@@ -1,5 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import Submit from '../button';
+import React, { useState, Fragment } from 'react';
 import Counter from '../counter';
 import FileLoader from '../fileloader';
 import TextInput from '../textinput';
@@ -7,32 +6,17 @@ import FilePreview from '../filepreview';
 import Image from '../file';
 import Modal from '../modal';
 import Message from '../message';
+import Button from '../button';
 
 const Form = () => {
   const MAX_VALUE = 50;
   const [inputValue, setInputValue] = useState('');
   const [fileList, setFileList] = useState([]);
-  const [error, setError] = useState();
-  const [disbaled, setDisabled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [fileForModal, setFileForModal] = useState();
   const counter = inputValue.length + fileList.length * 10;
-
-  useEffect(() => {
-    buttonDisabledHandler(inputValue, fileList);
-    addErrorClass(inputValue, fileList);
-  }, [inputValue, fileList]);
-
-  const buttonDisabledHandler = (text, files) => {
-    const condition = text.length + files.length * 10;
-    condition > MAX_VALUE || condition < 1
-      ? setDisabled(true)
-      : setDisabled(false);
-  };
-
-  const addErrorClass = (text, files) => {
-    const condition = text.length + files.length * 10;
-    condition > MAX_VALUE ? setError('error') : setError('');
-  };
+  const disabled = counter > MAX_VALUE || counter < 1 ? true : false;
+  const errorClass = counter > MAX_VALUE ? 'error' : '';
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -42,35 +26,29 @@ const Form = () => {
     setFileList([]);
   };
 
-  const fileAdd = (event) => {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      return false;
-    }
+  const handleFileAdd = (event) => {
     setFileList(Array.from(event.target.files));
   };
 
-  const fileDelete = (index) => {
-    const list = [...fileList];
-    list.splice(index, 1);
+  const handleFileDelete = (name) => {
+    const list = fileList.filter((file) => file.name !== name);
     setFileList(list);
   };
 
-  const fileModal = (bool) => {
-    setIsOpen(bool);
+  const fileModalOpen = (value, img) => {
+    const image = fileList.filter((file) => file === img);
+    setFileForModal(image)
+    setIsOpenModal(value);
   };
 
-  const file = fileList.map((img, index) => {
+  const listOfImages = fileList.map((img) => {
     return (
-      <Fragment key={Math.random()}>
+      <Fragment key={img.name}>
         <Image
           img={img}
-          onDelete={() => fileDelete(index)}
-          onClick={() => fileModal(true)}
+          onDelete={() => handleFileDelete(img.name)}
+          onClick={() => fileModalOpen(true, img)}
         />
-        <Modal isOpen={isOpen} onClose={() => fileModal(false)}>
-          <img src={URL.createObjectURL(img)} alt={img} />
-        </Modal>
       </Fragment>
     );
   });
@@ -80,25 +58,31 @@ const Form = () => {
       <h3 className="label">Create new post:</h3>
       <div className="_inputs">
         <TextInput
-          className={error}
+          className={errorClass}
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
+          placeholder="Enter text..."
         />
         {counter > MAX_VALUE && (
           <Message className="error__message">
             Exceeded the maximum number of charecters (maximum: {MAX_VALUE})
           </Message>
         )}
-        <FileLoader onChange={fileAdd} />
+        <FileLoader onChange={handleFileAdd} />
       </div>
 
       <div className="button__wrap">
         <Counter value={counter} maxValue={MAX_VALUE} />
         <div className="btns">
-          <FilePreview file={fileList.length}>{file}</FilePreview>
-          <Submit disabled={disbaled} />
+          <FilePreview>{listOfImages}</FilePreview>
+          <Button disabled={disabled} />
         </div>
       </div>
+      {isOpenModal && (
+        <Modal isOpen={isOpenModal} onClose={() => fileModalOpen(false)}>
+          <img src={fileForModal} alt={fileForModal} />
+        </Modal>
+      )}
     </form>
   );
 };

@@ -1,11 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FilePreview = (props) => {
-  const { file, children } = props;
-  if (file > 0) {
-    return <div className="files__preview">{children}</div>;
+  const { children } = props;
+  if (children === 0) {
+    return null;
   }
-  return null;
+  return <div className="files__preview">{children}</div>; 
+};
+
+FilePreview.propTypes = {
+  children: PropTypes.array
 };
 
 export default FilePreview;
