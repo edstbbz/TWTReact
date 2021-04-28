@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Counter = (props) => {
+const FormLimit = (props) => {
   const { value, maxValue } = props;
 
   return (
@@ -11,9 +11,9 @@ const Counter = (props) => {
   );
 };
 
-Counter.propTypes = {
+FormLimit.propTypes = {
   value: PropTypes.number.isRequired,
   maxValue: PropTypes.number.isRequired
 };
 
-export default Counter;
+export default FormLimit;

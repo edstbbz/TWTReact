@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import Counter from '../Counter';
+import FormLimit from '../FormLimit';
 import FileLoader from '../Fileloader';
 import TextInput from '../Textinput';
 import FilePreview from '../Filepreview';
@@ -11,11 +11,10 @@ const Form = () => {
   const MAX_VALUE = 50;
   const [inputValue, setInputValue] = useState('');
   const [fileList, setFileList] = useState([]);
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [fileForModal, setFileForModal] = useState();
   const counter = inputValue.length + fileList.length * 10;
   const disabled = counter > MAX_VALUE || counter < 1 ? true : false;
-  const errorClass = counter > MAX_VALUE ? 'error' : '';
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -36,7 +35,7 @@ const Form = () => {
   const fileModalOpen = (value, index) => {
     const image = fileList[index];
     setFileForModal(image);
-    setIsOpenModal(value);
+    setIsModalOpen(value);
   };
 
   const listOfImages = fileList.map((img, index) => {
@@ -56,7 +55,7 @@ const Form = () => {
       <h3 className="label">Create new post:</h3>
       <div className="inputs">
         <TextInput
-          isError={errorClass}
+          hasError={counter > MAX_VALUE}
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
           placeholder="Enter text..."
@@ -71,14 +70,14 @@ const Form = () => {
       </div>
 
       <div className="footer__form">
-        <Counter value={counter} maxValue={MAX_VALUE} />
+        <FormLimit value={counter} maxValue={MAX_VALUE} />
         <div className="footer__container">
           <FilePreview>{listOfImages}</FilePreview>
           <Button disabled={disabled} />
         </div>
       </div>
-      {isOpenModal && (
-        <Modal isOpen={isOpenModal} onClose={() => fileModalOpen(false)}>
+      {isModalOpen && (
+        <Modal isOpen={isModalOpen} onClose={() => fileModalOpen(false)}>
           <img src={URL.createObjectURL(fileForModal)} alt={fileForModal} />
         </Modal>
       )}
