@@ -6,9 +6,7 @@ const FormLimit = (props) => {
 
   return (
     <span className="counter">
-      {value}
-      /
-      {maxValue}
+      {value}/{maxValue}
     </span>
   );
 };

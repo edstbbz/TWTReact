@@ -64,8 +64,7 @@ const Form = () => {
         {counter > MAX_VALUE && (
           <span className="error__message">
             Exceeded the maximum number of charecters (maximum:
-            {MAX_VALUE}
-            )
+            {MAX_VALUE})
           </span>
         )}
       </div>

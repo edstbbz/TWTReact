@@ -22,7 +22,7 @@ File.propTypes = {
   img: PropTypes.objectOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
   onClick: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,

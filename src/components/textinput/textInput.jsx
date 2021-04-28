@@ -2,13 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TextInput = (props) => {
-  const {
-    value,
-    onChange,
-    hasError,
-    placeholder,
-    type,
-  } = props;
+  const { value, onChange, hasError, placeholder, type } = props;
 
   return (
     <input

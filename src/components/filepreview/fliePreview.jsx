@@ -14,7 +14,7 @@ FilePreview.propTypes = {
   children: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
 };
 
