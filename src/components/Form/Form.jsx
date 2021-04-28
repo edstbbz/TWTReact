@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import FormLimit from '../FormLimit';
 import FileLoader from '../FileLoader';
 import TextInput from '../TextInput';
@@ -7,7 +8,8 @@ import Image from '../File';
 import Modal from '../Modal';
 import Button from '../Button';
 
-const Form = () => {
+const Form = (props) => {
+  const { createContent } = props;
   const MAX_VALUE = 50;
   const [inputValue, setInputValue] = useState('');
   const [fileList, setFileList] = useState([]);
@@ -19,7 +21,7 @@ const Form = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     // eslint-disable-next-line
-    console.log({ message: inputValue, images: fileList });
+    createContent({ message: inputValue, images: fileList });
     setInputValue('');
     setFileList([]);
   };
@@ -83,6 +85,10 @@ const Form = () => {
       )}
     </form>
   );
+};
+
+Form.propTypes = {
+  createContent: PropTypes.func.isRequired,
 };
 
 export default Form;

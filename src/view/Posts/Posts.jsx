@@ -9,7 +9,7 @@ const Posts = () => {
     const content = [
       ...postContent,
       {
-        id: callback.id,
+        id: postContent.length,
         message: callback.message,
         images: callback.images,
       },
@@ -41,7 +41,7 @@ const Posts = () => {
     .reverse();
 
   return (
-    <div className="app">
+    <div className="app posts">
       <Form createContent={createPostContent} />
       <div className="posts__container">
         {postContent.length < 1 && <h3 className="post__message">No posts yet</h3>}

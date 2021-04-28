@@ -13,7 +13,7 @@ const FilePreview = (props) => {
 FilePreview.propTypes = {
   children: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      key: PropTypes.string.isRequired,
     })
   ).isRequired,
 };
