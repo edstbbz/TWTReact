@@ -6,14 +6,16 @@ const FormLimit = (props) => {
 
   return (
     <span className="counter">
-      {value}/{maxValue}
+      {value}
+      /
+      {maxValue}
     </span>
   );
 };
 
 FormLimit.propTypes = {
   value: PropTypes.number.isRequired,
-  maxValue: PropTypes.number.isRequired
+  maxValue: PropTypes.number.isRequired,
 };
 
 export default FormLimit;

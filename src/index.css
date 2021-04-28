@@ -73,8 +73,7 @@ body {
 }
 .button {
   border-radius: 0.5rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 1px 2px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
   color: #fff;
   display: block;
   width: 120px;
@@ -305,7 +304,7 @@ body {
 }
 .label__files::after {
   position: absolute;
-  content: "";
+  content: '';
   z-index: 5;
   top: -1px;
   right: 5px;
@@ -415,6 +414,8 @@ body {
   outline-offset: 0;
 }
 .delete__btn {
+  padding: 0;
+  border: none;
   z-index: 5;
   background: rgb(195, 195, 195);
   position: absolute;
@@ -452,10 +453,12 @@ body {
   transform: translate(-50%, -50%);
 }
 .modal_close {
+  background: none;
+  border: none;
   opacity: 0;
   position: absolute;
   display: flex;
-  right: 0;
+  right: 0.2rem;
   width: 1.3rem;
   font-size: 1.4rem;
   cursor: pointer;
@@ -488,6 +491,14 @@ body {
   left: 0;
   background: rgba(0, 0, 0, 0.3);
   animation: post 0.4s ease;
+}
+
+.img__open {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
 }
 @keyframes post {
   0% {

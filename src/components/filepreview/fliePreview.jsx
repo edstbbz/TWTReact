@@ -11,9 +11,11 @@ const FilePreview = (props) => {
 };
 
 FilePreview.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string
-  }))
+  children: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default FilePreview;

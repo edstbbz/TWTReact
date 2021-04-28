@@ -1,1 +1,1 @@
-export { default } from './FliePreview'
+export { default } from './FliePreview';

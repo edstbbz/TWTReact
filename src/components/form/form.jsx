@@ -14,10 +14,11 @@ const Form = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [fileForModal, setFileForModal] = useState();
   const counter = inputValue.length + fileList.length * 10;
-  const disabled = counter > MAX_VALUE || counter < 1 ? true : false;
+  const disabled = counter > MAX_VALUE || counter < 1;
 
   const submitHandler = (event) => {
     event.preventDefault();
+    // eslint-disable-next-line
     console.log({ message: inputValue, images: fileList });
     setInputValue('');
     setFileList([]);
@@ -38,17 +39,15 @@ const Form = () => {
     setIsModalOpen(value);
   };
 
-  const listOfImages = fileList.map((img, index) => {
-    return (
-      <Fragment key={img.name}>
-        <Image
-          img={img}
-          onDelete={() => handleFileDelete(img.name)}
-          onClick={() => fileModalOpen(true, index)}
-        />
-      </Fragment>
-    );
-  });
+  const listOfImages = fileList.map((img, index) => (
+    <Fragment key={img.name}>
+      <Image
+        img={img}
+        onDelete={() => handleFileDelete(img.name)}
+        onClick={() => fileModalOpen(true, index)}
+      />
+    </Fragment>
+  ));
 
   return (
     <form className="form" onSubmit={submitHandler}>
@@ -64,7 +63,9 @@ const Form = () => {
         <FileLoader onChange={handleFileAdd} />
         {counter > MAX_VALUE && (
           <span className="error__message">
-            Exceeded the maximum number of charecters (maximum: {MAX_VALUE})
+            Exceeded the maximum number of charecters (maximum:
+            {MAX_VALUE}
+            )
           </span>
         )}
       </div>
