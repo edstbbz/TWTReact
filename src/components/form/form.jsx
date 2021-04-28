@@ -1,8 +1,8 @@
 import React, { useState, Fragment } from 'react';
 import FormLimit from '../FormLimit';
-import FileLoader from '../Fileloader';
-import TextInput from '../Textinput';
-import FilePreview from '../Filepreview';
+import FileLoader from '../FileLoader';
+import TextInput from '../TextInput';
+import FilePreview from '../FilePreview';
 import Image from '../File';
 import Modal from '../Modal';
 import Button from '../Button';
