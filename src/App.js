@@ -2,7 +2,7 @@ import React from 'react';
 import Form from './components/Form';
 
 const App = () => (
-  <div className="app">
+  <div id="app" className="app">
     <Form />
   </div>
 );
