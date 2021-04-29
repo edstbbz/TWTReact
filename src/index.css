@@ -359,14 +359,14 @@ body {
 }
 
 .img__post img {
-  width: 45px;
+  max-width: 40px;
   border-radius: 5px;
-  height: auto;
+  object-fit: cover;
 }
 .img__post {
-  align-items: flex-end;
+  display: inline-flex;
   width: 45px;
-  height: auto;
+  height: 40px;
   border-radius: 5px;
   position: relative;
   margin-right: 0.2rem;
@@ -471,7 +471,6 @@ body {
   transform: scale(0.9);
 }
 .modal_content {
-  max-width: fit-content;
   margin-top: 0;
   padding: 0;
   animation: post 0.4s ease;

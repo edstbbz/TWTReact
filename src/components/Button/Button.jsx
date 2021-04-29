@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = (props) => {
-  const { disabled } = props;
+  const { disabled, onClick } = props;
   return (
-    <button type="button" disabled={disabled} className="button">
+    <button type="button" disabled={disabled} onClick={onClick} className="button">
       Submit
     </button>
   );
@@ -12,6 +12,7 @@ const Button = (props) => {
 
 Button.propTypes = {
   disabled: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Button;
