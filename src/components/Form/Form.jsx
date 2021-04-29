@@ -1,10 +1,10 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import FormLimit from '../FormLimit';
 import FileLoader from '../FileLoader';
 import TextInput from '../TextInput';
 import FilePreview from '../FilePreview';
-import Image from '../File';
+import File from '../File';
 import Modal from '../Modal';
 import Button from '../Button';
 
@@ -20,7 +20,6 @@ const Form = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    // eslint-disable-next-line
     createContent({ message: inputValue, images: fileList });
     setInputValue('');
     setFileList([]);
@@ -42,13 +41,12 @@ const Form = (props) => {
   };
 
   const listOfImages = fileList.map((img, index) => (
-    <Fragment key={img.name}>
-      <Image
-        img={img}
-        onDelete={() => handleFileDelete(img.name)}
-        onClick={() => fileModalOpen(true, index)}
-      />
-    </Fragment>
+    <File
+      key={img.name}
+      img={img}
+      onDelete={() => handleFileDelete(img.name)}
+      onClick={() => fileModalOpen(true, index)}
+    />
   ));
 
   return (
