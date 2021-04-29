@@ -124,8 +124,8 @@ body {
 .posts__container {
   position: relative;
   border-radius: 1rem;
-  height: 69vh;
   max-width: 768px;
+  min-height: 60vh;
   margin: 0.2rem auto 0 auto;
   padding: 0.5rem;
 }
@@ -209,79 +209,6 @@ body {
 .input__comment:focus + .button__comment {
   margin-left: 1.2rem;
   margin-top: 0.3rem;
-}
-@media (max-width: 600px) {
-  .app {
-    padding: 1rem;
-    min-height: calc(100vh - 2rem);
-  }
-  .input {
-    height: 2.5rem;
-    font-size: 1.3rem;
-  }
-  .posts__container {
-    padding: 0.4rem;
-  }
-  .posts {
-    margin: 0.5rem 0;
-    font-size: 1.2rem;
-  }
-  .post__message {
-    font-size: 0.8rem;
-  }
-  .label {
-    font-size: 1.1rem;
-  }
-
-  .button {
-    font-size: 1rem;
-  }
-  .button__comment {
-    font-size: 12px;
-  }
-
-  .input__comment {
-    height: 1.2rem;
-    font-size: 12px;
-    margin: 0.4rem 0;
-  }
-  .img__post img {
-    width: 30px;
-  }
-  .img__post {
-    width: 30px;
-  }
-}
-@media (max-width: 400px) {
-  .input {
-    height: 2rem;
-    font-size: 1rem;
-  }
-  .input__comment {
-    height: 1rem;
-    font-size: 11px;
-    margin: 0.8rem 0;
-  }
-
-  .input::placeholder {
-    font-size: 1rem;
-    padding-left: 0.2rem;
-  }
-  .input__comment::placeholder {
-    font-size: 0.6rem;
-  }
-  .post {
-    padding: 0.6rem;
-    font-size: 12px;
-    border-radius: 0.5rem;
-  }
-  .error__message {
-    font-size: 8px;
-  }
-  .button__comment {
-    font-size: 10px;
-    margin-left: 1rem;
-  }
 }
 
 .files {
@@ -476,8 +403,9 @@ body {
   animation: post 0.4s ease;
 }
 .modal_content img {
-  width: 100%;
-  height: auto;
+  object-fit: contain;
+  max-width: 90vw;
+  max-height: 80vh;
   border-radius: 10px;
   animation: post 0.8s ease;
 }
@@ -499,6 +427,84 @@ body {
   color: inherit;
   background-color: transparent;
 }
+
+@media (max-width: 600px) {
+  .app {
+    padding: 1rem;
+    min-height: calc(100vh - 2rem);
+  }
+  .input {
+    height: 2.5rem;
+    font-size: 1.3rem;
+  }
+  .posts__container {
+    padding: 0.4rem;
+  }
+  .posts {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+  }
+  .post__message {
+    font-size: 0.8rem;
+  }
+  .label {
+    font-size: 1.1rem;
+  }
+
+  .button {
+    font-size: 1rem;
+  }
+  .button__comment {
+    font-size: 12px;
+  }
+
+  .input__comment {
+    height: 1.2rem;
+    font-size: 12px;
+    margin: 0.4rem 0;
+  }
+  .img__post img {
+    width: 30px;
+  }
+  .img__post {
+    width: 30px;
+  }
+  .files__wrap {
+    bottom: 33%;
+  }
+}
+@media (max-width: 400px) {
+  .input {
+    height: 2rem;
+    font-size: 1rem;
+  }
+  .input__comment {
+    height: 1rem;
+    font-size: 11px;
+    margin: 0.8rem 0;
+  }
+
+  .input::placeholder {
+    font-size: 1rem;
+    padding-left: 0.2rem;
+  }
+  .input__comment::placeholder {
+    font-size: 0.6rem;
+  }
+  .post {
+    padding: 0.6rem;
+    font-size: 12px;
+    border-radius: 0.5rem;
+  }
+  .error__message {
+    font-size: 8px;
+  }
+  .button__comment {
+    font-size: 10px;
+    margin-left: 1rem;
+  }
+}
+
 @keyframes post {
   0% {
     opacity: 0;
