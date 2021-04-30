@@ -427,6 +427,41 @@ body {
   color: inherit;
   background-color: transparent;
 }
+.message_body {
+  z-index: 9999;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 5%;
+  right: 3%;
+  opacity: 1;
+  text-align: center;
+  background: #ffe15d;
+  box-shadow: (1px 1px 6px rgba(0, 0, 0, 0.548));
+  width: fit-content;
+  padding: 0 1rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  min-height: 40px;
+  animation: moveLarge 0.5s 1 ease;
+}
+
+.message_body span {
+  margin: 0 auto;
+}
+
+@keyframes moveLarge {
+  0% {
+    top: 5%;
+    right: 0%;
+    opacity: 0.5;
+  }
+  100% {
+    top: 5%;
+    right: 3%;
+    opacity: 1;
+  }
+}
 
 @media (max-width: 600px) {
   .app {

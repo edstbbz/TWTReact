@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from '../../components/Form';
 import Modal from '../../components/Modal';
 import Post from '../../components/Post';
+import Message from '../../components/Message';
 
 const Posts = () => {
   const [postContent, setPostContent] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [fileForModal, setFileForModal] = useState();
+  const [message, setMessage] = useState();
+
+  useEffect(() => {
+    setTimeout(() => setMessage(), 1500);
+  }, [message]);
 
   const fileModalOpen = (open, img) => {
     setFileForModal(img);
@@ -23,11 +29,13 @@ const Posts = () => {
       },
     ];
     setPostContent(content);
+    setMessage('POST CREATED SUCCESSFULLY');
   };
 
   const handlePostDelete = (id) => {
     const content = postContent.filter((post) => post.id !== id);
     setPostContent(content);
+    setMessage('POST SUCCESSFULLY DELETED');
   };
 
   const createPost = postContent
@@ -55,6 +63,7 @@ const Posts = () => {
 
   return (
     <div className="posts">
+      <Message>{message}</Message>
       <Form createContent={createPostContent} fileModalOpen={fileModalOpen} />
       <div className="posts__container">
         {postContent.length < 1 && <h3 className="post__message">No posts yet</h3>}

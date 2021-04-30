@@ -18,9 +18,11 @@ const Form = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    createContent({ message: inputValue, images: fileList });
-    setInputValue('');
-    setFileList([]);
+    if (!disabled) {
+      createContent({ message: inputValue, images: fileList });
+      setInputValue('');
+      setFileList([]);
+    }
   };
 
   const handleFileAdd = (event) => {
@@ -65,7 +67,7 @@ const Form = (props) => {
         <FormLimit value={counter} maxValue={MAX_VALUE} />
         <div className="footer__container">
           <FilePreview>{listOfImages}</FilePreview>
-          <Button disabled={disabled} onClick={submitHandler}/>
+          <Button disabled={disabled} onClick={submitHandler} />
         </div>
       </div>
     </form>
@@ -74,7 +76,7 @@ const Form = (props) => {
 
 Form.propTypes = {
   createContent: PropTypes.func.isRequired,
-  fileModalOpen: PropTypes.func.isRequired
+  fileModalOpen: PropTypes.func.isRequired,
 };
 
 export default Form;
