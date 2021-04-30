@@ -20,11 +20,11 @@ const Post = ({ text, images, onDelete }) => (
 Post.propTypes = {
   text: PropTypes.string.isRequired,
   images: PropTypes.node,
-  onDelete: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
 };
 
 Post.defaultProps = {
-  images: null
+  images: null,
 };
 
 export default Post;
