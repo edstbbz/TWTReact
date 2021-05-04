@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Form from '../../components/Form';
 import Modal from '../../components/Modal';
 import Post from '../../components/Post';
@@ -8,11 +8,13 @@ const Posts = () => {
   const [postContent, setPostContent] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [fileForModal, setFileForModal] = useState();
-  const [message, setMessage] = useState();
+  const [notifications, setNotifications] = useState([]);
 
-  useEffect(() => {
-    setTimeout(() => setMessage(), 1500);
-  }, [message]);
+  const deleteNotification = (id) =>
+    setNotifications(notifications.filter((notification) => notification.id !== id));
+
+  const createNotification = (message, type) =>
+    setNotifications([...notifications, { id: new Date().getTime(), message, type }]);
 
   const fileModalOpen = (open, img) => {
     setFileForModal(img);
@@ -23,19 +25,19 @@ const Posts = () => {
     const content = [
       ...postContent,
       {
-        id: postContent.length,
+        id: new Date().getTime(),
         message: data.message,
         images: data.images,
       },
     ];
     setPostContent(content);
-    setMessage('POST CREATED SUCCESSFULLY');
+    createNotification('POST CREATED SUCCESSFULLY', 'success');
   };
 
   const handlePostDelete = (id) => {
     const content = postContent.filter((post) => post.id !== id);
     setPostContent(content);
-    setMessage('POST SUCCESSFULLY DELETED');
+    createNotification('POST SUCCESSFULLY DELETED');
   };
 
   const createPost = postContent
@@ -61,9 +63,22 @@ const Posts = () => {
     })
     .reverse();
 
+  const notificationsList = notifications
+    .map((note) => (
+      <Message
+        key={note.id}
+        onDelete={() => deleteNotification(note.id)}
+        timeout={2400}
+        type={note.type}
+        autoClose
+      >
+        {note.message}
+      </Message>
+    ))
+    .reverse();
+
   return (
     <div className="posts">
-      <Message>{message}</Message>
       <Form createContent={createPostContent} fileModalOpen={fileModalOpen} />
       <div className="posts__container">
         {postContent.length < 1 && <h3 className="post__message">No posts yet</h3>}
@@ -73,6 +88,9 @@ const Posts = () => {
         <Modal isOpen={isModalOpen} onClose={() => fileModalOpen(false)}>
           <img src={URL.createObjectURL(fileForModal)} alt={fileForModal.name} />
         </Modal>
+      )}
+      {notifications.length !== 0 && (
+        <div className="notification_container">{notificationsList} </div>
       )}
     </div>
   );

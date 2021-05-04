@@ -2,11 +2,10 @@ body {
   position: relative;
   font-family: sans-serif;
   margin: 0;
-  background: rgb(218, 255, 163);
+  background: rgb(222 238 255);
 }
 .app {
   position: relative;
-  max-width: 768px;
   margin: 0 auto;
   min-height: calc(100vh - 4rem);
   padding: 2rem;
@@ -15,12 +14,14 @@ body {
   z-index: 4;
   position: relative;
   max-width: 768px;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   background: rgb(255, 255, 255);
   border-radius: 1rem;
   padding: 1rem;
   border: 1px solid rgba(226, 225, 200, 0.5);
+  box-shadow: 2px 3px 3px 0px #cddff3;
 }
 .label {
   margin: 0;
@@ -124,7 +125,7 @@ body {
 .posts__container {
   position: relative;
   border-radius: 1rem;
-  max-width: 768px;
+  max-width: 868px;
   min-height: 60vh;
   margin: 0.2rem auto 0 auto;
   padding: 0.5rem;
@@ -241,6 +242,7 @@ body {
   position: absolute;
   right: 0;
   bottom: 26%;
+  cursor: pointer;
 }
 .inputs {
   display: flex;
@@ -329,7 +331,7 @@ body {
   background: none;
   position: absolute;
   cursor: pointer;
-  top: 3px;
+  top: 4px;
   right: 9px;
   color: rgb(148 148 148);
   font-size: 1rem;
@@ -427,39 +429,78 @@ body {
   color: inherit;
   background-color: transparent;
 }
-.message_body {
+
+.notification_container {
+  height: max-content;
   z-index: 9999;
   position: fixed;
-  display: flex;
   align-items: center;
-  top: 5%;
+  top: 4%;
   right: 3%;
+  transition: all 0.4s ease-in;
+}
+.message_body {
+  position: relative;
+  margin: 0.5rem;
   opacity: 1;
+  display: flex;
   text-align: center;
+  align-items: center;
   background: #ffe15d;
   box-shadow: (1px 1px 6px rgba(0, 0, 0, 0.548));
   width: fit-content;
   padding: 0 1rem;
   border-radius: 5px;
-  font-size: 0.8rem;
-  min-height: 40px;
-  animation: moveLarge 0.5s 1 ease;
+  font-size: 0.6rem;
+  min-height: 30px;
+}
+.delete__message {
+  padding: 0;
+  border: none;
+  z-index: 5;
+  background: none;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  line-height: 10px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.moveto {
+  animation: moveTo 0.5s 1 ease;
+}
+
+.movedown {
+  animation: moveDown 0.5s 1 ease;
 }
 
 .message_body span {
   margin: 0 auto;
 }
 
-@keyframes moveLarge {
-  0% {
-    top: 5%;
-    right: 0%;
-    opacity: 0.5;
-  }
-  100% {
-    top: 5%;
+.message_success {
+  background: greenyellow;
+}
+
+.message_danger {
+  background: red;
+}
+
+@media (max-width: 1024px) {
+  .notification_container {
+    height: max-content;
+    top: auto;
+    bottom: 3%;
     right: 3%;
-    opacity: 1;
+  }
+  .moveto {
+    animation: moveToTablet 0.5s 1 ease;
   }
 }
 
@@ -546,5 +587,36 @@ body {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes moveTo {
+  0% {
+    transform: translateY(-300%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes moveToTablet {
+  0% {
+    transform: translateX(100%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes moveDown {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
   }
 }
