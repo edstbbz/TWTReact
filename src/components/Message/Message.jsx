@@ -16,8 +16,8 @@ const Message = (props) => {
 
   useEffect(() => {
     if (autoClose) {
-      const timeoutId = setTimeout(() => setIsClosing(true), timeout - 500);
-      return () => clearTimeout(timeoutId);
+      const close = setTimeout(() => setIsClosing(true), timeout - 500);
+      return () => clearTimeout(close);
     }
     return null;
   }, [autoClose]);
