@@ -1,9 +1,9 @@
 import React from 'react';
-import Form from './components/Form';
+import Posts from './view/Posts';
 
 const App = () => (
   <div id="app" className="app">
-    <Form />
+    <Posts/>
   </div>
 );
 

@@ -8,7 +8,7 @@ const File = (props) => {
     <div className="image__container">
       <div className="img__preview" data-title="Zoom">
         <button type="button" className="img__open" onClick={onClick}>
-          <img src={URL.createObjectURL(img)} alt={img} />
+          <img src={URL.createObjectURL(img)} alt={img.name} />
         </button>
       </div>
       <button type="button" className="delete__btn" onClick={onDelete}>

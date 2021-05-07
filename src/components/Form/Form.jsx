@@ -1,27 +1,28 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import FormLimit from '../FormLimit';
 import FileLoader from '../FileLoader';
 import TextInput from '../TextInput';
 import FilePreview from '../FilePreview';
-import Image from '../File';
-import Modal from '../Modal';
+import File from '../File';
 import Button from '../Button';
 
-const Form = () => {
+const Form = (props) => {
+  const { createContent, fileModalOpen } = props;
+
   const MAX_VALUE = 50;
   const [inputValue, setInputValue] = useState('');
   const [fileList, setFileList] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [fileForModal, setFileForModal] = useState();
   const counter = inputValue.length + fileList.length * 10;
   const disabled = counter > MAX_VALUE || counter < 1;
 
   const submitHandler = (event) => {
     event.preventDefault();
-    // eslint-disable-next-line
-    console.log({ message: inputValue, images: fileList });
-    setInputValue('');
-    setFileList([]);
+    if (!disabled) {
+      createContent({ message: inputValue, images: fileList });
+      setInputValue('');
+      setFileList([]);
+    }
   };
 
   const handleFileAdd = (event) => {
@@ -33,20 +34,13 @@ const Form = () => {
     setFileList(list);
   };
 
-  const fileModalOpen = (value, index) => {
-    const image = fileList[index];
-    setFileForModal(image);
-    setIsModalOpen(value);
-  };
-
-  const listOfImages = fileList.map((img, index) => (
-    <Fragment key={img.name}>
-      <Image
-        img={img}
-        onDelete={() => handleFileDelete(img.name)}
-        onClick={() => fileModalOpen(true, index)}
-      />
-    </Fragment>
+  const listOfImages = fileList.map((img) => (
+    <File
+      key={img.name}
+      img={img}
+      onDelete={() => handleFileDelete(img.name)}
+      onClick={() => fileModalOpen(true, img)}
+    />
   ));
 
   return (
@@ -73,16 +67,16 @@ const Form = () => {
         <FormLimit value={counter} maxValue={MAX_VALUE} />
         <div className="footer__container">
           <FilePreview>{listOfImages}</FilePreview>
-          <Button disabled={disabled} />
+          <Button disabled={disabled} onClick={submitHandler} />
         </div>
       </div>
-      {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={() => fileModalOpen(false)}>
-          <img src={URL.createObjectURL(fileForModal)} alt={fileForModal} />
-        </Modal>
-      )}
     </form>
   );
+};
+
+Form.propTypes = {
+  createContent: PropTypes.func.isRequired,
+  fileModalOpen: PropTypes.func.isRequired,
 };
 
 export default Form;

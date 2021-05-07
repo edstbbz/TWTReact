@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 const TextInput = (props) => {
   const { value, onChange, hasError, placeholder, type } = props;
@@ -7,7 +8,7 @@ const TextInput = (props) => {
   return (
     <input
       onChange={onChange}
-      className={`input ${hasError && 'error'}`}
+      className={cn('input', {error: hasError})}
       type={type}
       placeholder={placeholder}
       value={value}

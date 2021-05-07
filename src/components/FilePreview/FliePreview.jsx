@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const FilePreview = (props) => {
   const { children } = props;
-
+  
   if (children === 0) {
     return null;
   }
@@ -12,9 +12,7 @@ const FilePreview = (props) => {
 
 FilePreview.propTypes = {
   children: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    })
+    PropTypes.node
   ).isRequired,
 };
 

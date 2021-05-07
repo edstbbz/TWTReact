@@ -5,13 +5,14 @@ const Modal = (props) => {
   const { onClose, children } = props;
 
   return (
-    <div className="bg">
+    <div>
       <div className="modal">
         <button type="button" className="modal_close" onClick={onClose}>
           &times;
         </button>
         <div className="modal_content">{children}</div>
       </div>
+      <div onClick={onClose} aria-hidden="true" className="bg"/>
     </div>
   );
 };
